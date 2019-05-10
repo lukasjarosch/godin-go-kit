@@ -3,9 +3,10 @@ package grpc
 import (
 	"context"
 
+	"errors"
+
 	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
 	"github.com/lukasjarosch/godin-go-kit/internal/example"
-	"errors"
 )
 
 func EncodeError(err error) error {
@@ -13,7 +14,7 @@ func EncodeError(err error) error {
 }
 
 func EncodeHelloRequest(ctx context.Context, request interface{}) (pbRequest interface{}, err error) {
-	if pbRequest == nil {
+	if request == nil {
 		return nil, errors.New("nil HelloRequest")
 	}
 	req := request.(endpoint.HelloRequest)
@@ -50,7 +51,7 @@ func EncodeHelloResponse(ctx context.Context, response interface{}) (pbResponse 
 }
 
 func DecodeHelloResponse(ctx context.Context, pbResponse interface{}) (response interface{}, err error) {
-	if response == nil {
+	if pbResponse == nil {
 		return nil, errors.New("nil HelloResponse")
 	}
 	resp := pbResponse.(*example.HelloResponse)
@@ -60,4 +61,3 @@ func DecodeHelloResponse(ctx context.Context, pbResponse interface{}) (response 
 
 	return response, nil
 }
-
