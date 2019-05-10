@@ -1,4 +1,4 @@
-package interceptor
+package middleware
 
 import (
 	"github.com/go-kit/kit/log"
@@ -7,18 +7,18 @@ import (
 	"time"
 )
 
-type logInterceptor struct {
+type logMiddleware struct {
 	logger log.Logger
 	next service.ExampleService
 }
 
-func NewLogInterceptor(logger log.Logger) Interceptor {
+func NewLogMiddleware(logger log.Logger) Middleware {
 	return func(next service.ExampleService) service.ExampleService {
-		return &logInterceptor{logger, next}
+		return &logMiddleware{logger, next}
 	}
 }
 
-func (i logInterceptor) Hello(ctx context.Context, name string) (greeting string, err error) {
+func (i logMiddleware) Hello(ctx context.Context, name string) (greeting string, err error) {
 	i.logger.Log("endpoint", "Hello", "request", struct {
 		Name string
 	}{Name:name})
