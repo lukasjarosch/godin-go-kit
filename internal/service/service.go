@@ -1,6 +1,6 @@
 // This is the core service file. It specifies the behaviour of the business-logic
 // and enables us to easily layer our application.
-package example
+package service
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 
 // ExampleService defines the exposed business logic of the application.
 // Each function of the ExampleService is exposed via endpoints.
-type ExampleService interface {
+type Example interface {
 	Hello(ctx context.Context, name string) (greeting string, err error)
 }
 

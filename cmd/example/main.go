@@ -3,12 +3,13 @@ package main
 import (
 	"github.com/go-kit/kit/log"
 	"os"
-	"github.com/lukasjarosch/godin-go-kit/internal/example"
-	"github.com/lukasjarosch/godin-go-kit/internal/middleware"
+	"github.com/lukasjarosch/godin-go-kit/internal/service"
+	"github.com/lukasjarosch/godin-go-kit/internal/service/implementation"
+	"github.com/lukasjarosch/godin-go-kit/internal/service/middleware"
 	googleGrpc "google.golang.org/grpc"
 	"net"
 	"github.com/lukasjarosch/godin-go-kit/internal/api"
-	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
+	"github.com/lukasjarosch/godin-go-kit/internal/service/endpoint"
 	"github.com/lukasjarosch/godin-go-kit/internal/grpc"
 )
 
@@ -20,8 +21,8 @@ func main() {
 		logger = log.With(logger, "timestamp", log.DefaultTimestampUTC)
 	}
 
-	var svc example.ExampleService
-	svc = example.NewExampleService(logger)
+	var svc service.Example
+	svc = implementation.NewExampleService(logger)
 	svc = middleware.NewLogMiddleware(logger)(svc)
 
 	endpoints := endpoint.Endpoints(svc)

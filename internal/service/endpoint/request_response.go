@@ -15,3 +15,4 @@ type (
 // In order to determine whether an endpoint failed, we need to implement the Failer interface.
 // That way we can use middlewares to act on errors
 func (r HelloResponse) Failed() error { return r.Err }
+

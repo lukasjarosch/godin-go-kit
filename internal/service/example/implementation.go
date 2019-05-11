@@ -3,6 +3,7 @@ package example
 import (
 	"context"
 	"github.com/go-kit/kit/log"
+	"fmt"
 )
 
 // This file provides the actual implementation of the endpoints which make up the service
@@ -17,8 +18,9 @@ func NewExampleService(logger log.Logger) *exampleService {
 
 func (s *exampleService) Hello(ctx context.Context, name string) (greeting string, err error) {
 	logger := log.With(s.logger, "endpoint", "Hello")
-
+	greeting = fmt.Sprintf("Ohai there, %s", name)
 	logger.Log("msg", "done greeting")
-	return "Foo", nil
-	//return "" , ErrNotImplemented
+
+	return greeting, nil
 }
+

@@ -6,15 +6,15 @@ import (
 	"errors"
 
 	"github.com/lukasjarosch/godin-go-kit/internal/api"
-	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
-	"github.com/lukasjarosch/godin-go-kit/internal/example"
+	"github.com/lukasjarosch/godin-go-kit/internal/service/endpoint"
+	"github.com/lukasjarosch/godin-go-kit/internal/service"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func EncodeError(err error) error {
 	switch err {
-	case example.ErrNotImplemented:
+	case service.ErrNotImplemented:
 		return status.Error(codes.Unimplemented, err.Error())
 	}
 	return err

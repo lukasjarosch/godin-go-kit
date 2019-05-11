@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/go-kit/kit/endpoint"
+	"github.com/lukasjarosch/godin-go-kit/internal/service"
 )
 
 // Set bundles all of the service's endpoints. Also, Set implements the ExampleService interface.
@@ -12,6 +13,19 @@ import (
 // skipping the transport layer.
 type Set struct {
 	HelloEndpoint endpoint.Endpoint
+}
+
+// Encpoints initializes the Set with all endpoints including their middleware
+func Endpoints(svc service.Example) Set {
+
+	var helloEndpoint endpoint.Endpoint
+	{
+		helloEndpoint = HelloEndpoint(svc)
+	}
+
+	return Set{
+		HelloEndpoint: helloEndpoint,
+	}
 }
 
 func (s Set) Hello(ctx context.Context, name string) (greeting string, err error) {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	example "github.com/lukasjarosch/godin-go-kit/pkg/grpc"
+	example "github.com/lukasjarosch/godin-go-kit/pkg/example"
 	"google.golang.org/grpc"
 )
 
@@ -19,7 +19,7 @@ func main() {
 
 	client := example.NewClient(conn)
 
-	resp, err := client.Hello(context.Background(), "Hans")
+	resp, err := client.Hello(context.Background(), "Theresa")
 	if err != nil {
 		fmt.Printf("error :%v\n", err)
 		os.Exit(1)
