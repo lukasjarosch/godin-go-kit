@@ -15,7 +15,7 @@ type Set struct {
 	HelloEndpoint endpoint.Endpoint
 }
 
-// Encpoints initializes the Set with all endpoints including their middleware
+// Endpoints initializes the Set with all endpoints including their middleware
 func Endpoints(svc service.Example) Set {
 
 	var helloEndpoint endpoint.Endpoint

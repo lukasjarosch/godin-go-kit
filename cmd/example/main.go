@@ -4,7 +4,7 @@ import (
 	"github.com/go-kit/kit/log"
 	"os"
 	"github.com/lukasjarosch/godin-go-kit/internal/service"
-	"github.com/lukasjarosch/godin-go-kit/internal/service/implementation"
+	"github.com/lukasjarosch/godin-go-kit/internal/service/example"
 	"github.com/lukasjarosch/godin-go-kit/internal/service/middleware"
 	googleGrpc "google.golang.org/grpc"
 	"net"
@@ -22,7 +22,7 @@ func main() {
 	}
 
 	var svc service.Example
-	svc = implementation.NewExampleService(logger)
+	svc = example.NewExampleService(logger)
 	svc = middleware.NewLogMiddleware(logger)(svc)
 
 	endpoints := endpoint.Endpoints(svc)

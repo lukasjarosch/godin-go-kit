@@ -17,15 +17,11 @@ type grpcServer struct {
 }
 
 func NewGrpcServer(endpoints endpoint.Set, logger log.Logger) api.ExampleServiceServer {
-	options := []kitGrpc.ServerOption{
-	}
-
 	return &grpcServer{
 		hello:kitGrpc.NewServer(
 			endpoints.HelloEndpoint,
 			DecodeHelloRequest,
 			EncodeHelloResponse,
-			append(options)...,
 		),
 	}
 }

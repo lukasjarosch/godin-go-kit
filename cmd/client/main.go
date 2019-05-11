@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	example "github.com/lukasjarosch/godin-go-kit/pkg/example"
+	example "github.com/lukasjarosch/godin-go-kit/pkg/grpc"
 	"google.golang.org/grpc"
 )
 

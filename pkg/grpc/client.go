@@ -2,7 +2,7 @@ package grpc
 
 import (
 	googleGrpc"google.golang.org/grpc"
-	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
+	"github.com/lukasjarosch/godin-go-kit/internal/service/endpoint"
 	kitGrpc "github.com/go-kit/kit/transport/grpc"
 	grpc "github.com/lukasjarosch/godin-go-kit/internal/grpc"
 	"github.com/lukasjarosch/godin-go-kit/internal/api"
