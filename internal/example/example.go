@@ -19,6 +19,6 @@ func (s *exampleService) Hello(ctx context.Context, name string) (greeting strin
 	logger := log.With(s.logger, "endpoint", "Hello")
 
 	logger.Log("msg", "done greeting")
-	//return "Foo", nil
-	return "" , ErrNotImplemented
+	return "Foo", nil
+	//return "" , ErrNotImplemented
 }

@@ -5,12 +5,11 @@ import (
 
 	"errors"
 
-	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
 	"github.com/lukasjarosch/godin-go-kit/internal/api"
+	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
 	"github.com/lukasjarosch/godin-go-kit/internal/example"
-	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/codes"
-	"runtime"
+	"google.golang.org/grpc/status"
 )
 
 func EncodeError(err error) error {
@@ -22,7 +21,6 @@ func EncodeError(err error) error {
 }
 
 func EncodeHelloRequest(ctx context.Context, request interface{}) (pbRequest interface{}, err error) {
-	runtime.Breakpoint()
 	if request == nil {
 		return nil, errors.New("nil HelloRequest")
 	}

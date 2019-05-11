@@ -15,7 +15,9 @@ type Set struct {
 }
 
 func (s Set) Hello(ctx context.Context, name string) (greeting string, err error) {
-	resp, err := s.HelloEndpoint(ctx, name)
+	resp, err := s.HelloEndpoint(ctx, HelloRequest{
+		Name: name,
+	})
 	if err != nil {
 		return "", err
 	}

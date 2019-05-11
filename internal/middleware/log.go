@@ -27,10 +27,16 @@ func (i logMiddleware) Hello(ctx context.Context, name string) (greeting string,
 	// TODO: replace structs with internal req/resp structures
 
 	defer func(begin time.Time) {
+		if err != nil {
+			i.logger.Log("endpoint", "Hello", "response", struct {
+				Greeting string
+			}{Greeting:greeting}, "took", time.Since(begin),
+				"err", err.Error())
+		}
+
 		i.logger.Log("endpoint", "Hello", "response", struct {
 			Greeting string
-		}{Greeting:greeting}, "took", time.Since(begin),
-		"err", err.Error())
+		}{Greeting:greeting}, "took", time.Since(begin))
 	}(time.Now())
 
 	return i.next.Hello(ctx, name)

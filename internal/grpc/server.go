@@ -18,7 +18,6 @@ type grpcServer struct {
 
 func NewGrpcServer(endpoints endpoint.Set, logger log.Logger) api.ExampleServiceServer {
 	options := []kitGrpc.ServerOption{
-		kitGrpc.ServerErrorLogger(logger),
 	}
 
 	return &grpcServer{

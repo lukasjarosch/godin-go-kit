@@ -12,7 +12,7 @@ func NewClient(conn *googleGrpc.ClientConn, opts ...kitGrpc.ClientOption) endpoi
 	return endpoint.Set{
 		HelloEndpoint:kitGrpc.NewClient(
 			conn,
-			"example",
+			"example.ExampleService",
 			"Hello",
 			grpc.EncodeHelloRequest,
 			grpc.DecodeHelloResponse,
