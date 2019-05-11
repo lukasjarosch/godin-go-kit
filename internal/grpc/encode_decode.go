@@ -6,19 +6,28 @@ import (
 	"errors"
 
 	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
+	"github.com/lukasjarosch/godin-go-kit/internal/api"
 	"github.com/lukasjarosch/godin-go-kit/internal/example"
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/codes"
+	"runtime"
 )
 
 func EncodeError(err error) error {
+	switch err {
+	case example.ErrNotImplemented:
+		return status.Error(codes.Unimplemented, err.Error())
+	}
 	return err
 }
 
 func EncodeHelloRequest(ctx context.Context, request interface{}) (pbRequest interface{}, err error) {
+	runtime.Breakpoint()
 	if request == nil {
 		return nil, errors.New("nil HelloRequest")
 	}
 	req := request.(endpoint.HelloRequest)
-	pbRequest = &example.HelloRequest{
+	pbRequest = &api.HelloRequest{
 		Name: req.Name,
 	}
 
@@ -29,7 +38,7 @@ func DecodeHelloRequest(ctx context.Context, pbRequest interface{}) (request int
 	if pbRequest == nil {
 		return nil, errors.New("nil HelloRequest")
 	}
-	req := pbRequest.(*example.HelloRequest)
+	req := pbRequest.(*api.HelloRequest)
 	request = endpoint.HelloRequest{
 		Name: req.Name,
 	}
@@ -41,8 +50,8 @@ func EncodeHelloResponse(ctx context.Context, response interface{}) (pbResponse 
 		return nil, errors.New("nil HelloResponse")
 	}
 	resp := response.(endpoint.HelloResponse)
-	pb := &example.HelloResponse{
-		Greeting: &example.Greeting{
+	pb := &api.HelloResponse{
+		Greeting: &api.Greeting{
 			Text: resp.Greeting,
 		},
 	}
@@ -54,7 +63,7 @@ func DecodeHelloResponse(ctx context.Context, pbResponse interface{}) (response 
 	if pbResponse == nil {
 		return nil, errors.New("nil HelloResponse")
 	}
-	resp := pbResponse.(*example.HelloResponse)
+	resp := pbResponse.(*api.HelloResponse)
 	response = endpoint.HelloResponse{
 		Greeting: resp.Greeting.Text,
 	}

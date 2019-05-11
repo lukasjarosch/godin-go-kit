@@ -4,7 +4,7 @@ import (
 
 	kitGrpc "github.com/go-kit/kit/transport/grpc"
 	"github.com/lukasjarosch/godin-go-kit/internal/endpoint"
-	"github.com/lukasjarosch/godin-go-kit/internal/example"
+	"github.com/lukasjarosch/godin-go-kit/internal/api"
 	"github.com/go-kit/kit/log"
 	"context"
 )
@@ -16,7 +16,7 @@ type grpcServer struct {
 	hello kitGrpc.Handler
 }
 
-func NewGrpcServer(endpoints endpoint.Set, logger log.Logger) example.ExampleServiceServer {
+func NewGrpcServer(endpoints endpoint.Set, logger log.Logger) api.ExampleServiceServer {
 	options := []kitGrpc.ServerOption{
 		kitGrpc.ServerErrorLogger(logger),
 	}
@@ -31,10 +31,10 @@ func NewGrpcServer(endpoints endpoint.Set, logger log.Logger) example.ExampleSer
 	}
 }
 
-func (g *grpcServer) Hello(ctx context.Context, request *example.HelloRequest) (*example.HelloResponse, error) {
+func (g *grpcServer) Hello(ctx context.Context, request *api.HelloRequest) (*api.HelloResponse, error) {
 	_, response, err := g.hello.ServeGRPC(ctx, request)
 	if err != nil {
 	    return nil, EncodeError(err)
 	}
-	return response.(*example.HelloResponse), nil
+	return response.(*api.HelloResponse), nil
 }

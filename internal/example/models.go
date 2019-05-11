@@ -1,4 +1,4 @@
-package service
+package example
 
 // Greeting does nothing actually
 type Greeting struct {

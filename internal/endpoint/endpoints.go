@@ -3,12 +3,12 @@ package endpoint
 
 import (
 	"github.com/go-kit/kit/endpoint"
-	"github.com/lukasjarosch/godin-go-kit/internal/service"
 	"context"
+	"github.com/lukasjarosch/godin-go-kit/internal/example"
 )
 
 // Encpoints initializes the Set with all endpoints including their middleware
-func Endpoints(svc service.ExampleService) Set {
+func Endpoints(svc example.ExampleService) Set {
 
 	var helloEndpoint endpoint.Endpoint
 	{
@@ -21,7 +21,7 @@ func Endpoints(svc service.ExampleService) Set {
 }
 
 // HelloEndpoint constructs the endpoint of the Hello() method
-func HelloEndpoint(service service.ExampleService) endpoint.Endpoint {
+func HelloEndpoint(service example.ExampleService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
 		req := request.(HelloRequest)
 		res, err := service.Hello(ctx, req.Name)

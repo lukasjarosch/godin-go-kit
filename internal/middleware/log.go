@@ -2,18 +2,18 @@ package middleware
 
 import (
 	"github.com/go-kit/kit/log"
-	"github.com/lukasjarosch/godin-go-kit/internal/service"
+	"github.com/lukasjarosch/godin-go-kit/internal/example"
 	"context"
 	"time"
 )
 
 type logMiddleware struct {
 	logger log.Logger
-	next service.ExampleService
+	next   example.ExampleService
 }
 
 func NewLogMiddleware(logger log.Logger) Middleware {
-	return func(next service.ExampleService) service.ExampleService {
+	return func(next example.ExampleService) example.ExampleService {
 		return &logMiddleware{logger, next}
 	}
 }
@@ -29,7 +29,8 @@ func (i logMiddleware) Hello(ctx context.Context, name string) (greeting string,
 	defer func(begin time.Time) {
 		i.logger.Log("endpoint", "Hello", "response", struct {
 			Greeting string
-		}{Greeting:greeting}, "took", time.Since(begin))
+		}{Greeting:greeting}, "took", time.Since(begin),
+		"err", err.Error())
 	}(time.Now())
 
 	return i.next.Hello(ctx, name)

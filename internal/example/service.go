@@ -1,9 +1,10 @@
 // This is the core service file. It specifies the behaviour of the business-logic
 // and enables us to easily layer our application.
-package service
+package example
 
 import (
 	"context"
+	"errors"
 )
 
 // ExampleService defines the exposed business logic of the application.
@@ -16,5 +17,8 @@ type ExampleService interface {
 type Repository interface {
 }
 
-// Here shall be space for the internal data types
+// Application errors
+var (
+	ErrNotImplemented = errors.New("endpoint is not implemented")
+)
 

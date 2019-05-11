@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/lukasjarosch/godin-go-kit/internal/service"
+	"github.com/lukasjarosch/godin-go-kit/internal/example"
 )
 
-type Middleware func(service service.ExampleService) service.ExampleService
+type Middleware func(service example.ExampleService) example.ExampleService
